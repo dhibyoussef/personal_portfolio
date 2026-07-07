@@ -102,7 +102,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div variants={itemVariants}>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight mb-4">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight mb-4 text-foreground">
             Hi, I'm{" "}
             <br className="sm:hidden" />
             <span className="gradient-text">Youssef Dhib</span>
@@ -162,18 +162,18 @@ export default function Hero() {
 
         <motion.div
           variants={itemVariants}
-          className="mt-16 flex items-center justify-center gap-8 md:gap-12"
+          className="mt-20 flex items-center justify-center gap-6 md:gap-10 flex-wrap"
         >
           {[
-            { value: "10+", label: "Projects Done" },
-            { value: "Full Stack", label: "Development" },
+            { value: "10+", label: "Projects" },
+            { value: "Full Stack", label: "Developer" },
             { value: "100%", label: "Dedicated" },
           ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-lg md:text-xl font-bold gradient-text">
+            <div key={stat.label} className="text-center px-4 py-2 rounded-lg hover:bg-primary/5 transition-colors duration-300">
+              <div className="text-xl md:text-2xl font-bold gradient-text block">
                 {stat.value}
               </div>
-              <div className="text-xs text-muted-foreground/50 mt-1 uppercase tracking-wider">
+              <div className="text-xs text-foreground/50 mt-1 uppercase tracking-widest font-medium">
                 {stat.label}
               </div>
             </div>
