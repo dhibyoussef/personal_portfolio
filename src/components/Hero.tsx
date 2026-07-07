@@ -38,46 +38,49 @@ export default function Hero() {
       <div className="absolute inset-0 grid-overlay" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,oklch(0.55_0.22_280/0.08)_0%,transparent_60%),radial-gradient(ellipse_at_70%_50%,oklch(0.72_0.25_25/0.06)_0%,transparent_60%)]" />
 
-      {/* Animated gradient orbs - subtle */}
+      {/* Premium animated background */}
       <motion.div
-        className="absolute top-1/4 -left-20 w-72 h-72 rounded-full blur-3xl"
-        style={{ background: "oklch(0.55 0.22 280 / 0.08)" }}
+        className="absolute top-0 -left-1/2 w-full h-full rounded-full blur-3xl pointer-events-none"
+        style={{ background: "linear-gradient(135deg, oklch(0.55 0.22 280 / 0.15), transparent)" }}
         animate={{
-          x: [0, 60, 0],
-          y: [0, -40, 0],
-          scale: [1, 1.2, 1],
+          x: [0, 100, 0],
+          y: [0, -60, 0],
         }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-1/3 -right-96 w-96 h-96 rounded-full blur-3xl"
-        style={{ background: "oklch(0.72 0.25 25 / 0.06)" }}
+        className="absolute -bottom-1/2 -right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+        style={{ background: "linear-gradient(135deg, oklch(0.72 0.25 25 / 0.12), transparent)" }}
         animate={{
-          x: [0, -50, 0],
-          y: [0, 50, 0],
-          scale: [1, 1.15, 1],
+          x: [0, -80, 0],
+          y: [0, 80, 0],
+          rotate: [0, 180, 360],
         }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
 
-      {/* Particle dots */}
-      {Array.from({ length: 20 }).map((_, i) => (
+      {/* Floating accent shapes */}
+      {Array.from({ length: 15 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 rounded-full"
+          className="absolute rounded-full pointer-events-none"
           style={{
-            background: i % 3 === 0 ? "oklch(0.55 0.22 280 / 0.25)" : "oklch(0.72 0.25 25 / 0.2)",
-            left: `${Math.random() * 60}%`,
+            width: 2 + Math.random() * 4,
+            height: 2 + Math.random() * 4,
+            background: i % 2 === 0 ? "oklch(0.55 0.22 280 / 0.5)" : "oklch(0.72 0.25 25 / 0.4)",
+            left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
           }}
           animate={{
-            y: [0, -30, 0],
-            opacity: [0, 0.6, 0],
+            y: [0, -50, 0],
+            x: [0, Math.random() * 30 - 15, 0],
+            opacity: [0, 0.8, 0],
+            scale: [0, 1, 0],
           }}
           transition={{
-            duration: 3 + Math.random() * 4,
+            duration: 4 + Math.random() * 5,
             repeat: Infinity,
-            delay: Math.random() * 5,
+            delay: Math.random() * 6,
             ease: "easeInOut",
           }}
         />
@@ -101,28 +104,33 @@ export default function Hero() {
           </Badge>
         </motion.div>
 
-        <motion.div variants={itemVariants}>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight mb-4 text-foreground">
-            Hi, I'm{" "}
-            <br className="sm:hidden" />
-            <span className="gradient-text">Youssef Dhib</span>
-          </h1>
+        <motion.div variants={itemVariants} className="mb-8">
+          <div className="inline-block">
+            <motion.h1 
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black leading-[0.95] tracking-tighter mb-4 text-foreground"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Youssef{" "}
+              <br className="sm:hidden" />
+              <span className="gradient-text inline-block">Dhib</span>
+            </motion.h1>
+          </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="h-12 md:h-14 flex items-center justify-center mb-4">
-          <span className="text-xl sm:text-2xl md:text-3xl text-foreground/70 font-medium">
-            <span className="text-primary">&lt;</span>
+        <motion.div variants={itemVariants} className="mb-8">
+          <span className="text-lg sm:text-xl md:text-2xl text-foreground/70 font-semibold tracking-wide">
             <motion.span
               key={wordIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="inline-block text-primary font-semibold"
+              initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5 }}
+              className="inline-block bg-gradient-to-r from-primary via-accent to-blue-500 bg-clip-text text-transparent font-bold"
             >
               {words[wordIndex]}
             </motion.span>
-            <span className="text-primary animate-pulse"> /&gt;</span>
           </span>
         </motion.div>
 
@@ -137,27 +145,35 @@ export default function Hero() {
 
         <motion.div
           variants={itemVariants}
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-12"
         >
-          <a href="#projects">
+          <motion.a 
+            href="#projects"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <Button
               size="lg"
-              className="h-13 px-8 rounded-full text-base gap-2 bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 text-white"
+              className="h-14 px-10 rounded-full text-base font-bold gap-2 bg-gradient-to-r from-primary via-primary to-accent hover:shadow-2xl hover:shadow-primary/40 shadow-xl shadow-primary/25 transition-all duration-300 text-white uppercase tracking-wide"
             >
-              <Sparkles className="size-4" />
+              <Sparkles className="size-5" />
               View My Work
             </Button>
-          </a>
-          <a href="#contact">
+          </motion.a>
+          <motion.a 
+            href="#contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <Button
               variant="outline"
               size="lg"
-              className="h-13 px-8 rounded-full text-base gap-2 border-primary/30 text-foreground hover:border-primary/60 hover:bg-primary/5 transition-all duration-300"
+              className="h-14 px-10 rounded-full text-base font-bold gap-2 border-2 border-foreground/20 text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary transition-all duration-300 uppercase tracking-wide"
             >
-              <Code2 className="size-4" />
+              <Code2 className="size-5" />
               Get In Touch
             </Button>
-          </a>
+          </motion.a>
         </motion.div>
 
         <motion.div
