@@ -132,11 +132,8 @@ export default function Projects() {
                 className="relative"
               >
                 <Card
-<<<<<<< HEAD
-                  className={`relative overflow-hidden border bg-white/50 border-foreground/10 backdrop-blur-sm glow-card bg-gradient-to-br ${project.gradient} h-full`}
-=======
+
                   className={`relative overflow-hidden border bg-card/30 border-foreground/10 backdrop-blur-sm glow-card bg-gradient-to-br ${project.gradient} h-full`}
->>>>>>> e366143c22041a6f66808e05f848b2e6e8878e4b
                 >
                   {/* Top gradient accent line */}
                   <div

@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-=======
+
 import { useState, useEffect, createContext, useContext } from "react"
->>>>>>> e366143c22041a6f66808e05f848b2e6e8878e4b
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import About from "./components/About"
@@ -18,14 +16,13 @@ type Theme = "dark" | "light"
 
 const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
   theme: "dark",
-  toggle: () => {},
+  toggle: () => { },
 })
 
 export const useTheme = () => useContext(ThemeContext)
 
 export default function App() {
-<<<<<<< HEAD
-=======
+
   const [theme, setTheme] = useState<Theme>("dark")
 
   useEffect(() => {
@@ -41,7 +38,7 @@ export default function App() {
 
   const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"))
 
->>>>>>> e366143c22041a6f66808e05f848b2e6e8878e4b
+
   return (
     <ThemeContext.Provider value={{ theme, toggle }}>
       <TooltipProvider>
