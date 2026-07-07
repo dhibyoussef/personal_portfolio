@@ -17,28 +17,41 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
   const { theme, toggle } = useTheme()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40)
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight
+      const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0
+      setScrollProgress(progress)
+    }
     window.addEventListener("scroll", onScroll)
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={cn(
-        "fixed top-0 inset-x-0 z-50 transition-all duration-500",
-        scrolled
+    <>
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-blue-500 z-50 origin-left"
+        style={{ scaleX: scrollProgress / 100 }}
+      />
+      
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className={cn(
+          "fixed top-0 inset-x-0 z-40 transition-all duration-500",
+          scrolled
 
-          ? "bg-background/70 backdrop-blur-xl border-b border-border/40 shadow-lg shadow-black/5"
-          : "bg-gradient-to-b from-background/20 to-transparent"
+            ? "bg-background/70 backdrop-blur-xl border-b border-border/40 shadow-lg shadow-black/5"
+            : "bg-gradient-to-b from-background/20 to-transparent"
 
-      )}
-    >
+        )}
+      >
       <div className="max-w-6xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
         <motion.a
           href="#hero"
@@ -146,6 +159,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+      </motion.nav>
+    </>
   )
 }
