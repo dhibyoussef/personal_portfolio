@@ -124,28 +124,29 @@ export default function Projects() {
                 <Card
                   className={`relative overflow-hidden border bg-white/50 border-foreground/10 backdrop-blur-sm glow-card bg-gradient-to-br ${project.gradient} h-full`}
                 >
-                  {/* Top gradient line */}
+                  {/* Top gradient accent line */}
                   <div
-                    className="absolute top-0 left-0 right-0 h-1 opacity-60"
+                    className="absolute top-0 left-0 right-0 h-1.5 opacity-70"
                     style={{
                       background: `linear-gradient(90deg, ${project.color}, transparent)`,
                     }}
                   />
 
-                  {/* Corner decoration */}
-                  <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-primary/5 to-transparent rounded-bl-full" />
+                  {/* Subtle corner glow */}
+                  <div className="absolute -top-24 -right-24 w-56 h-56 rounded-full opacity-40 blur-3xl pointer-events-none" style={{ background: project.color }} />
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-primary/8 to-transparent rounded-bl-full opacity-60" />
 
-                  <CardHeader className="pb-2">
+                  <CardHeader className="pb-2 relative z-10">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-3">
                         <motion.span
-                          className="text-2xl"
+                          className="text-3xl"
                           animate={hoveredIndex === i ? { rotate: [0, -10, 10, -10, 0], scale: 1.2 } : {}}
                           transition={{ duration: 0.5 }}
                         >
                           {project.icon}
                         </motion.span>
-                        <CardTitle className="text-base font-semibold group-hover:text-primary transition-colors">
+                        <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors">
                           {project.title}
                         </CardTitle>
                       </div>
@@ -158,17 +159,17 @@ export default function Projects() {
                     </div>
                   </CardHeader>
 
-                  <CardContent className="space-y-4">
-                    <p className="text-sm text-foreground/70 leading-relaxed">
+                  <CardContent className="space-y-5 relative z-10">
+                    <p className="text-sm text-foreground/65 leading-relaxed font-medium">
                       {project.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
                         <Badge
                           key={tag}
                           variant="secondary"
-                          className="text-[10px] px-2 py-0.5 font-normal bg-muted/50"
+                          className="text-[11px] px-2.5 py-1 font-medium bg-primary/8 text-primary/80 border-primary/15"
                         >
                           {tag}
                         </Badge>
