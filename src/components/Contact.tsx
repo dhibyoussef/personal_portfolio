@@ -52,7 +52,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 px-6 bg-muted/30">
+    <section id="contact" className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-white/50 to-primary/5">
       <div className="absolute inset-0 grid-overlay opacity-30" />
       <div className="max-w-6xl mx-auto relative">
         <motion.div
@@ -65,11 +65,11 @@ export default function Contact() {
           <Badge className="mb-4 border-primary/30 bg-primary/10 text-primary rounded-full">
             Contact
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
             Let's{" "}
             <span className="gradient-text">Work Together</span>
           </h2>
-          <p className="text-muted-foreground/60 mt-4 max-w-xl mx-auto text-sm">
+          <p className="text-foreground/60 mt-4 max-w-xl mx-auto text-sm">
             Got a project in mind? Let's build something amazing together.
           </p>
         </motion.div>
@@ -82,9 +82,9 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-3"
           >
-            <Card className="glass-card gradient-border-card">
+            <Card className="glass-card gradient-border-card bg-white/40 border-foreground/10">
               <CardContent className="p-6 md:p-8">
-                <h3 className="text-sm font-semibold mb-6 flex items-center gap-2">
+                <h3 className="text-sm font-semibold mb-6 flex items-center gap-2 text-foreground">
                   <span className="p-1.5 rounded-lg bg-primary/10">
                     <Send className="size-3.5 text-primary" />
                   </span>
@@ -93,41 +93,41 @@ export default function Contact() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-xs font-medium text-muted-foreground">Your Name</label>
+                      <label className="text-xs font-medium text-foreground/70">Your Name</label>
                       <Input
                         placeholder="John Doe"
                         required
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="h-11 bg-muted/30 border-muted-foreground/20 focus:border-primary/40 transition-colors"
+                        className="h-11 bg-white/50 border-foreground/20 focus:border-primary/40 transition-colors"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-medium text-muted-foreground">Your Email</label>
+                      <label className="text-xs font-medium text-foreground/70">Your Email</label>
                       <Input
                         type="email"
                         placeholder="john@example.com"
                         required
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="h-11 bg-muted/30 border-muted-foreground/20 focus:border-primary/40 transition-colors"
+                        className="h-11 bg-white/50 border-foreground/20 focus:border-primary/40 transition-colors"
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-medium text-muted-foreground">Message</label>
+                    <label className="text-xs font-medium text-foreground/70">Message</label>
                     <Textarea
                       placeholder="Tell me about your project..."
                       required
                       rows={5}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="bg-muted/30 border-muted-foreground/20 focus:border-primary/40 transition-colors resize-none"
+                      className="bg-white/50 border-foreground/20 focus:border-primary/40 transition-colors resize-none"
                     />
                   </div>
                   <Button
                     type="submit"
-                    className="w-full h-12 gap-2 rounded-xl bg-gradient-to-r from-primary to-purple-500 hover:from-primary/90 hover:to-purple-500/90 shadow-lg shadow-primary/20"
+                    className="w-full h-12 gap-2 rounded-xl bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
                   >
                     {sent ? (
                       <>
@@ -153,9 +153,9 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-2 space-y-5"
           >
-            <Card className="glass-card gradient-border-card">
+            <Card className="glass-card gradient-border-card bg-white/40 border-foreground/10">
               <CardContent className="p-6 space-y-4">
-                <h3 className="text-sm font-semibold flex items-center gap-2">
+                <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
                   <span className="p-1.5 rounded-lg bg-primary/10">
                     <Globe className="size-3.5 text-primary" />
                   </span>
@@ -169,7 +169,7 @@ export default function Contact() {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="h-9 gap-2 text-xs border-muted-foreground/20 hover:border-primary/30 hover:bg-primary/5"
+                            className="h-9 gap-2 text-xs border-foreground/20 hover:border-primary/50 hover:bg-primary/10"
                           >
                             <social.icon className={`size-3.5 ${social.color} transition-colors`} />
                             {social.name}
@@ -185,15 +185,15 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            <Card className="glass-card gradient-border-card">
+            <Card className="glass-card gradient-border-card bg-white/40 border-foreground/10">
               <CardContent className="p-6 space-y-4">
-                <h3 className="text-sm font-semibold flex items-center gap-2">
+                <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
                   <span className="p-1.5 rounded-lg bg-primary/10">
                     <Download className="size-3.5 text-primary" />
                   </span>
                   Download CV
                 </h3>
-                <p className="text-xs text-muted-foreground/60">
+                <p className="text-xs text-foreground/60">
                   Get my full resume with detailed experience, education, and skills.
                 </p>
                 <a
@@ -205,7 +205,7 @@ export default function Contact() {
                 >
                   <Button
                     variant="default"
-                    className="w-full gap-2 rounded-xl h-11 bg-gradient-to-r from-primary to-purple-500 hover:from-primary/90 hover:to-purple-500/90 shadow-lg shadow-primary/20"
+                    className="w-full gap-2 rounded-xl h-11 bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
                   >
                     <Download className="size-4" />
                     Download CV (PDF)
@@ -214,14 +214,14 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-primary/10 via-purple-500/5 to-cyan-500/5 border-primary/20">
+            <Card className="bg-gradient-to-br from-primary/10 via-accent/5 to-blue-500/5 border-primary/20">
               <CardContent className="p-6 space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="p-2.5 rounded-xl bg-primary/10 shrink-0">
                     <Mail className="size-4 text-primary" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-xs font-semibold text-muted-foreground mb-0.5">Email Me Directly</h4>
+                    <h4 className="text-xs font-semibold text-foreground/70 mb-0.5">Email Me Directly</h4>
                     <a
                       href="mailto:youssefdhib28@gmail.com"
                       className="text-sm text-primary hover:text-primary/80 transition-colors break-all"
@@ -231,13 +231,13 @@ export default function Contact() {
                   </div>
                   <ArrowUpRight className="size-3.5 text-primary/40 shrink-0 mt-1" />
                 </div>
-                <Separator className="bg-border/20" />
+                <Separator className="bg-foreground/10" />
                 <div className="flex items-start gap-4">
                   <div className="p-2.5 rounded-xl bg-primary/10 shrink-0">
                     <MapPin className="size-4 text-primary" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-semibold text-muted-foreground mb-0.5">Location</h4>
+                    <h4 className="text-xs font-semibold text-foreground/70 mb-0.5">Location</h4>
                     <p className="text-sm text-foreground">Remote / Tunisia</p>
                   </div>
                 </div>

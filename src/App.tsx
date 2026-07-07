@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import About from "./components/About"
@@ -10,10 +9,6 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import "./App.css"
 
 export default function App() {
-  useEffect(() => {
-    document.documentElement.classList.add("dark")
-  }, [])
-
   return (
     <TooltipProvider>
       <div className="relative min-h-screen overflow-x-hidden">
