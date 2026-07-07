@@ -56,7 +56,7 @@ const skillTags = ["HTML", "CSS", "JavaScript", "TypeScript", "Tailwind CSS", "R
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-24 md:py-32 px-6 bg-muted/30">
+    <section id="skills" className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-white/50 to-primary/5">
       <div className="absolute inset-0 grid-overlay opacity-30" />
       <div className="max-w-6xl mx-auto relative">
         <motion.div
@@ -69,11 +69,11 @@ export default function Skills() {
           <Badge className="mb-4 border-primary/30 bg-primary/10 text-primary rounded-full">
             Skills & Expertise
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
             Technologies I Work{" "}
             <span className="gradient-text">With</span>
           </h2>
-          <p className="text-muted-foreground/60 mt-4 max-w-xl mx-auto text-sm">
+          <p className="text-foreground/60 mt-4 max-w-xl mx-auto text-sm">
             A curated set of technologies I use daily to bring ideas to life
           </p>
         </motion.div>
@@ -88,7 +88,7 @@ export default function Skills() {
           {skillCategories.map((cat) => (
             <motion.div key={cat.title} variants={cardVariants}>
               <Card
-                className={`group h-full overflow-hidden border bg-card/30 backdrop-blur-sm glow-card bg-gradient-to-br ${cat.gradient}`}
+                className={`group h-full overflow-hidden border bg-white/50 border-foreground/10 backdrop-blur-sm glow-card bg-gradient-to-br ${cat.gradient}`}
               >
                 <CardHeader className="pb-2">
                   <div className="flex items-center gap-3">
@@ -136,9 +136,9 @@ export default function Skills() {
           className="mt-16"
         >
           <div className="text-center mb-6">
-            <p className="text-xs text-muted-foreground/40 uppercase tracking-widest">
-              — Full Technology Stack —
-            </p>
+          <p className="text-xs text-foreground/50 uppercase tracking-widest">
+            — Full Technology Stack —
+          </p>
           </div>
           <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
             {skillTags.map((tag, i) => (
@@ -149,7 +149,7 @@ export default function Skills() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.02, duration: 0.3 }}
                 whileHover={{ scale: 1.1, y: -4 }}
-                className="px-4 py-2 text-xs rounded-full bg-muted/50 border border-border/40 text-muted-foreground/70 hover:text-foreground hover:border-primary/30 hover:bg-primary/5 transition-all duration-300 cursor-default"
+                className="px-4 py-2 text-xs rounded-full bg-white/40 border border-primary/20 text-foreground/70 hover:text-foreground hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 cursor-default"
               >
                 {tag}
               </motion.span>

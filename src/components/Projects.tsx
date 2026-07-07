@@ -88,11 +88,11 @@ export default function Projects() {
           <Badge className="mb-4 border-primary/30 bg-primary/10 text-primary rounded-full">
             Portfolio
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
             Featured{" "}
             <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-muted-foreground/60 mt-4 max-w-xl mx-auto text-sm">
+          <p className="text-foreground/60 mt-4 max-w-xl mx-auto text-sm">
             A selection of projects I've built. Each one represents a unique challenge solved with care.
           </p>
         </motion.div>
@@ -122,7 +122,7 @@ export default function Projects() {
                 className="relative"
               >
                 <Card
-                  className={`relative overflow-hidden border bg-card/30 backdrop-blur-sm glow-card bg-gradient-to-br ${project.gradient} h-full`}
+                  className={`relative overflow-hidden border bg-white/50 border-foreground/10 backdrop-blur-sm glow-card bg-gradient-to-br ${project.gradient} h-full`}
                 >
                   {/* Top gradient line */}
                   <div
@@ -150,8 +150,8 @@ export default function Projects() {
                         </CardTitle>
                       </div>
                       <motion.span
-                        animate={hoveredIndex === i ? { rotate: 0, opacity: 1 } : { rotate: 45, opacity: 0.3 }}
-                        className="text-muted-foreground/30"
+                        animate={hoveredIndex === i ? { rotate: 0, opacity: 1 } : { rotate: 45, opacity: 0.4 }}
+                        className="text-foreground/40"
                       >
                         <ArrowUpRight className="size-4" />
                       </motion.span>
@@ -159,7 +159,7 @@ export default function Projects() {
                   </CardHeader>
 
                   <CardContent className="space-y-4">
-                    <p className="text-sm text-muted-foreground/70 leading-relaxed">
+                    <p className="text-sm text-foreground/70 leading-relaxed">
                       {project.description}
                     </p>
 

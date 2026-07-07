@@ -43,21 +43,21 @@ export default function About() {
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-8 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-2"
-          >
-            <Card className="overflow-hidden gradient-border-card bg-card/50">
-              <CardContent className="p-0">
-                <div className="relative aspect-square bg-gradient-to-br from-primary/30 via-purple-500/20 to-cyan-500/20 flex items-center justify-center overflow-hidden">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_30%,oklch(0.62_0.22_280/0.15)_50%,transparent_70%)]"
-                  />
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="lg:col-span-2"
+        >
+          <Card className="overflow-hidden gradient-border-card bg-white/50 border-foreground/10">
+            <CardContent className="p-0">
+              <div className="relative aspect-square bg-gradient-to-br from-primary/15 via-accent/10 to-blue-500/10 flex items-center justify-center overflow-hidden">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_30%,oklch(0.55_0.22_280/0.1)_50%,transparent_70%)]"
+                />
                   <motion.div
                     animate={{ scale: [1, 1.05, 1] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -85,18 +85,18 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:col-span-3 space-y-6"
           >
-            <Card className="glass-card gradient-border-card">
+            <Card className="glass-card gradient-border-card bg-white/40 border-foreground/10">
               <CardContent className="p-6 md:p-8 space-y-6">
                 <div className="relative">
                   <Quote className="size-8 text-primary/20 absolute -top-1 -left-1" />
-                  <p className="text-muted-foreground leading-relaxed pl-6 pt-2 italic">
+                  <p className="text-foreground/70 leading-relaxed pl-6 pt-2 italic">
                     I'm a passionate Full Stack Developer with expertise across the entire
                     development stack. From crafting pixel-perfect frontends with React and Tailwind
                     to building robust backends with PHP, Symfony, and Laravel — I thrive on bringing
                     ideas to life through clean, maintainable code.
                   </p>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-foreground/70 leading-relaxed">
                   My journey spans web development, mobile apps with Flutter, automation with N8N,
                   and data pipelines with Python. Every project is an opportunity to innovate and
                   deliver experiences that users love.
@@ -118,8 +118,8 @@ export default function About() {
                   <div className="p-2 w-fit rounded-lg bg-gradient-to-br from-primary/20 to-purple-500/20 mb-3">
                     <h.icon className="size-4 text-primary" />
                   </div>
-                  <div className="text-sm font-medium">{h.label}</div>
-                  <div className="text-xs text-muted-foreground/60 mt-0.5">{h.desc}</div>
+                  <div className="text-sm font-medium text-foreground">{h.label}</div>
+                  <div className="text-xs text-foreground/60 mt-0.5">{h.desc}</div>
                 </motion.div>
               ))}
             </div>
@@ -128,9 +128,9 @@ export default function About() {
               {infoItems.map((item) => (
                 <div
                   key={item.label}
-                  className="p-3 rounded-xl bg-gradient-to-br from-muted/50 to-muted/20 border border-border/30"
+                  className="p-3 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/15"
                 >
-                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground/40 font-medium">
+                  <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-medium">
                     {item.label}
                   </div>
                   <div className="text-sm font-medium text-foreground mt-0.5">

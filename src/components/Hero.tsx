@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { motion, type Variants } from "framer-motion"
 import { ArrowDown, Sparkles, Code2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { FloatingShape3D } from "./FloatingShape3D"
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -34,14 +35,23 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0">
       <div className="absolute inset-0 grid-overlay" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,oklch(0.62_0.22_280/0.12)_0%,transparent_60%),radial-gradient(ellipse_at_70%_50%,oklch(0.55_0.18_200/0.08)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,oklch(0.55_0.22_280/0.08)_0%,transparent_60%),radial-gradient(ellipse_at_70%_50%,oklch(0.72_0.25_25/0.06)_0%,transparent_60%)]" />
 
-      {/* Animated gradient orbs */}
+      {/* 3D Floating Shape */}
+      <div className="absolute inset-0 flex items-center justify-end pr-0 md:pr-20 pointer-events-none">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 md:w-[500px] md:h-[500px] opacity-70">
+          <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-primary/5 to-accent/5 rounded-full" />}>
+            <FloatingShape3D />
+          </Suspense>
+        </div>
+      </div>
+
+      {/* Animated gradient orbs - subtle */}
       <motion.div
         className="absolute top-1/4 -left-20 w-72 h-72 rounded-full blur-3xl"
-        style={{ background: "oklch(0.62 0.22 280 / 0.15)" }}
+        style={{ background: "oklch(0.55 0.22 280 / 0.08)" }}
         animate={{
           x: [0, 60, 0],
           y: [0, -40, 0],
@@ -50,8 +60,8 @@ export default function Hero() {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-1/3 -right-20 w-96 h-96 rounded-full blur-3xl"
-        style={{ background: "oklch(0.55 0.18 200 / 0.1)" }}
+        className="absolute bottom-1/3 -right-96 w-96 h-96 rounded-full blur-3xl"
+        style={{ background: "oklch(0.72 0.25 25 / 0.06)" }}
         animate={{
           x: [0, -50, 0],
           y: [0, 50, 0],
@@ -61,18 +71,18 @@ export default function Hero() {
       />
 
       {/* Particle dots */}
-      {Array.from({ length: 30 }).map((_, i) => (
+      {Array.from({ length: 20 }).map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 rounded-full"
           style={{
-            background: i % 3 === 0 ? "oklch(0.62 0.22 280 / 0.4)" : "oklch(0.55 0.18 200 / 0.3)",
-            left: `${Math.random() * 100}%`,
+            background: i % 3 === 0 ? "oklch(0.55 0.22 280 / 0.25)" : "oklch(0.72 0.25 25 / 0.2)",
+            left: `${Math.random() * 60}%`,
             top: `${Math.random() * 100}%`,
           }}
           animate={{
             y: [0, -30, 0],
-            opacity: [0, 0.8, 0],
+            opacity: [0, 0.6, 0],
           }}
           transition={{
             duration: 3 + Math.random() * 4,
@@ -87,7 +97,7 @@ export default function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
+        className="relative z-10 text-center px-6 max-w-4xl mx-auto"
       >
         <motion.div variants={itemVariants} className="mb-6">
           <Badge
@@ -110,25 +120,25 @@ export default function Hero() {
         </motion.div>
 
         <motion.div variants={itemVariants} className="h-12 md:h-14 flex items-center justify-center mb-4">
-          <span className="text-xl sm:text-2xl md:text-3xl text-muted-foreground/80 font-medium">
-            <span className="text-primary/60">&lt;</span>
+          <span className="text-xl sm:text-2xl md:text-3xl text-foreground/70 font-medium">
+            <span className="text-primary">&lt;</span>
             <motion.span
               key={wordIndex}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="inline-block"
+              className="inline-block text-primary font-semibold"
             >
               {words[wordIndex]}
             </motion.span>
-            <span className="text-primary/60 animate-pulse"> /&gt;</span>
+            <span className="text-primary animate-pulse"> /&gt;</span>
           </span>
         </motion.div>
 
         <motion.p
           variants={itemVariants}
-          className="text-muted-foreground/60 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-foreground/60 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           I craft digital experiences that blend creativity with technology.
           From web apps to mobile solutions — I build products that matter
@@ -142,7 +152,7 @@ export default function Hero() {
           <a href="#projects">
             <Button
               size="lg"
-              className="h-13 px-8 rounded-full text-base gap-2 bg-gradient-to-r from-primary to-purple-500 hover:from-primary/90 hover:to-purple-500/90 shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300"
+              className="h-13 px-8 rounded-full text-base gap-2 bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 text-white"
             >
               <Sparkles className="size-4" />
               View My Work
@@ -152,7 +162,7 @@ export default function Hero() {
             <Button
               variant="outline"
               size="lg"
-              className="h-13 px-8 rounded-full text-base gap-2 border-muted-foreground/20 hover:border-primary/40 hover:bg-primary/5"
+              className="h-13 px-8 rounded-full text-base gap-2 border-primary/30 text-foreground hover:border-primary/60 hover:bg-primary/5 transition-all duration-300"
             >
               <Code2 className="size-4" />
               Get In Touch
@@ -185,7 +195,7 @@ export default function Hero() {
             href="#about"
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="inline-flex flex-col items-center gap-1 text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors group"
+            className="inline-flex flex-col items-center gap-1 text-foreground/40 hover:text-foreground/70 transition-colors group"
           >
             <span className="text-xs">Scroll down</span>
             <ArrowDown className="size-4" />

@@ -30,8 +30,8 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-500",
         scrolled
-          ? "bg-background/70 backdrop-blur-xl border-b border-border/40 shadow-lg shadow-black/10"
-          : "bg-gradient-to-b from-background/20 to-transparent"
+          ? "bg-white/70 backdrop-blur-xl border-b border-foreground/10 shadow-lg shadow-black/5"
+          : "bg-gradient-to-b from-white/20 to-transparent"
       )}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
@@ -42,7 +42,7 @@ export default function Navbar() {
           whileTap={{ scale: 0.95 }}
         >
           <span className="gradient-text">&lt;YD</span>
-          <span className="text-muted-foreground/60"> /&gt;</span>
+          <span className="text-foreground/50"> /&gt;</span>
         </motion.a>
 
         <div className="hidden md:flex items-center gap-2">
@@ -53,7 +53,7 @@ export default function Navbar() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * i, duration: 0.4 }}
-              className="relative px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+              className="relative px-4 py-2 text-sm text-foreground/60 hover:text-foreground transition-colors group"
             >
               {link.label}
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-purple-400 rounded-full transition-all duration-300 group-hover:w-6" />
@@ -67,7 +67,7 @@ export default function Navbar() {
           >
             <Button
               size="sm"
-              className="ml-2 rounded-full bg-gradient-to-r from-primary to-purple-500 hover:from-primary/90 hover:to-purple-500/90 shadow-lg shadow-primary/20"
+              className="ml-2 rounded-full bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
             >
               Hire Me
             </Button>
@@ -92,7 +92,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden border-t border-border/30 bg-background/95 backdrop-blur-xl overflow-hidden"
+            className="md:hidden border-t border-foreground/10 bg-white/95 backdrop-blur-xl overflow-hidden"
           >
             <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
               {navLinks.map((link, i) => (
@@ -103,15 +103,15 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => setMobileOpen(false)}
-                  className="px-4 py-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                  className="px-4 py-3 rounded-lg text-foreground/60 hover:text-foreground hover:bg-primary/5 transition-colors"
                 >
                   {link.label}
                 </motion.a>
               ))}
               <a href="#contact" onClick={() => setMobileOpen(false)}>
-                <Button className="w-full mt-2 rounded-full bg-gradient-to-r from-primary to-purple-500">
-                  Hire Me
-                </Button>
+              <Button className="w-full mt-2 rounded-full bg-gradient-to-r from-primary via-primary to-accent text-white">
+                Hire Me
+              </Button>
               </a>
             </div>
           </motion.div>
