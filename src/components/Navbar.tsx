@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { useTheme } from "@/App"
 
 const navLinks = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
+  { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ]
@@ -15,6 +17,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { theme, toggle } = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -30,8 +33,13 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-500",
         scrolled
+<<<<<<< HEAD
           ? "bg-white/70 backdrop-blur-xl border-b border-foreground/10 shadow-lg shadow-black/5"
           : "bg-gradient-to-b from-white/20 to-transparent"
+=======
+          ? "bg-background/70 backdrop-blur-xl border-b border-border/40 shadow-lg shadow-black/5"
+          : "bg-gradient-to-b from-background/20 to-transparent"
+>>>>>>> e366143c22041a6f66808e05f848b2e6e8878e4b
       )}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
@@ -59,30 +67,54 @@ export default function Navbar() {
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-purple-400 rounded-full transition-all duration-300 group-hover:w-6" />
             </motion.a>
           ))}
+
+          <motion.button
+            onClick={toggle}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5 }}
+            className="ml-2 p-2 rounded-full text-foreground/60 hover:text-foreground hover:bg-muted/50 transition-colors"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          </motion.button>
+
           <motion.a
             href="#contact"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.6 }}
           >
             <Button
               size="sm"
+<<<<<<< HEAD
               className="ml-2 rounded-full bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
+=======
+              className="ml-2 rounded-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
+>>>>>>> e366143c22041a6f66808e05f848b2e6e8878e4b
             >
               Hire Me
             </Button>
           </motion.a>
         </div>
 
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-        </Button>
+        <div className="flex md:hidden items-center gap-2">
+          <button
+            onClick={toggle}
+            className="p-2 rounded-full text-foreground/60 hover:text-foreground hover:bg-muted/50 transition-colors"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          </button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          </Button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -103,15 +135,25 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => setMobileOpen(false)}
+<<<<<<< HEAD
                   className="px-4 py-3 rounded-lg text-foreground/60 hover:text-foreground hover:bg-primary/5 transition-colors"
+=======
+                  className="px-4 py-3 rounded-lg text-foreground/60 hover:text-foreground hover:bg-muted/50 transition-colors"
+>>>>>>> e366143c22041a6f66808e05f848b2e6e8878e4b
                 >
                   {link.label}
                 </motion.a>
               ))}
               <a href="#contact" onClick={() => setMobileOpen(false)}>
+<<<<<<< HEAD
               <Button className="w-full mt-2 rounded-full bg-gradient-to-r from-primary via-primary to-accent text-white">
                 Hire Me
               </Button>
+=======
+                <Button className="w-full mt-2 rounded-full bg-gradient-to-r from-primary to-accent text-white">
+                  Hire Me
+                </Button>
+>>>>>>> e366143c22041a6f66808e05f848b2e6e8878e4b
               </a>
             </div>
           </motion.div>
