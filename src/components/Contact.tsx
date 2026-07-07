@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Mail, MapPin, Download, Send, CheckCircle2, Globe, ArrowUpRight } from "lucide-react"
+import { Mail, MapPin, Download, Send, CheckCircle2, Globe, ArrowUpRight, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -34,25 +34,43 @@ function TwitterIcon({ className }: { className?: string }) {
 }
 
 const socials = [
-  { name: "GitHub", url: "https://github.com/youssefdhib", icon: GithubIcon, color: "hover:text-[#f0f6fc]" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/youssefdhib", icon: LinkedinIcon, color: "hover:text-[#0a66c2]" },
-  { name: "Twitter / X", url: "https://x.com/youssefdhib", icon: TwitterIcon, color: "hover:text-[#1da1f2]" },
-  { name: "Email", url: "mailto:youssefdhib28@gmail.com", icon: Mail, color: "hover:text-primary" },
+  { name: "GitHub", url: "#", icon: GithubIcon },
+  { name: "LinkedIn", url: "#", icon: LinkedinIcon },
+  { name: "Twitter / X", url: "#", icon: TwitterIcon },
+  { name: "Email", url: "mailto:youssefdhib28@gmail.com", icon: Mail },
 ]
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" })
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    window.location.href = `mailto:youssefdhib28@gmail.com?subject=Portfolio Contact from ${encodeURIComponent(form.name)}&body=${encodeURIComponent(form.message)}%0A%0AFrom: ${encodeURIComponent(form.email)}`
-    setSent(true)
-    setTimeout(() => setSent(false), 3000)
+    setStatus("sending")
+
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/youssefdhib28@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      })
+
+      if (!res.ok) throw new Error("Failed")
+      setStatus("sent")
+      setForm({ name: "", email: "", message: "" })
+      setTimeout(() => setStatus("idle"), 4000)
+    } catch {
+      setStatus("error")
+      setTimeout(() => setStatus("idle"), 3000)
+    }
   }
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-white/50 to-primary/5">
+    <section id="contact" className="relative py-24 md:py-32 px-6 bg-muted/30">
       <div className="absolute inset-0 grid-overlay opacity-30" />
       <div className="max-w-6xl mx-auto relative">
         <motion.div
@@ -65,7 +83,7 @@ export default function Contact() {
           <Badge className="mb-4 border-primary/30 bg-primary/10 text-primary rounded-full">
             Contact
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
             Let's{" "}
             <span className="gradient-text">Work Together</span>
           </h2>
@@ -82,9 +100,9 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-3"
           >
-            <Card className="glass-card gradient-border-card bg-white/40 border-foreground/10">
+            <Card className="glass-card border-foreground/10">
               <CardContent className="p-6 md:p-8">
-                <h3 className="text-sm font-semibold mb-6 flex items-center gap-2 text-foreground">
+                <h3 className="text-sm font-semibold mb-6 flex items-center gap-2">
                   <span className="p-1.5 rounded-lg bg-primary/10">
                     <Send className="size-3.5 text-primary" />
                   </span>
@@ -99,7 +117,7 @@ export default function Contact() {
                         required
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="h-11 bg-white/50 border-foreground/20 focus:border-primary/40 transition-colors"
+                        className="h-11 bg-background/50 border-foreground/20 focus:border-primary/40 transition-colors"
                       />
                     </div>
                     <div className="space-y-2">
@@ -110,7 +128,7 @@ export default function Contact() {
                         required
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="h-11 bg-white/50 border-foreground/20 focus:border-primary/40 transition-colors"
+                        className="h-11 bg-background/50 border-foreground/20 focus:border-primary/40 transition-colors"
                       />
                     </div>
                   </div>
@@ -122,23 +140,22 @@ export default function Contact() {
                       rows={5}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="bg-white/50 border-foreground/20 focus:border-primary/40 transition-colors resize-none"
+                      className="bg-background/50 border-foreground/20 focus:border-primary/40 transition-colors resize-none"
                     />
                   </div>
                   <Button
                     type="submit"
-                    className="w-full h-12 gap-2 rounded-xl bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
+                    disabled={status === "sending"}
+                    className="w-full h-12 gap-2 rounded-xl bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white disabled:opacity-70"
                   >
-                    {sent ? (
-                      <>
-                        <CheckCircle2 className="size-4" />
-                        Message Sent!
-                      </>
+                    {status === "sending" ? (
+                      <><Loader2 className="size-4 animate-spin" /> Sending...</>
+                    ) : status === "sent" ? (
+                      <><CheckCircle2 className="size-4" /> Message Sent!</>
+                    ) : status === "error" ? (
+                      <><span className="text-red-200">Failed — try email directly</span></>
                     ) : (
-                      <>
-                        <Send className="size-4" />
-                        Send Message
-                      </>
+                      <><Send className="size-4" /> Send Message</>
                     )}
                   </Button>
                 </form>
@@ -153,9 +170,9 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-2 space-y-5"
           >
-            <Card className="glass-card gradient-border-card bg-white/40 border-foreground/10">
+            <Card className="glass-card border-foreground/10">
               <CardContent className="p-6 space-y-4">
-                <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
+                <h3 className="text-sm font-semibold flex items-center gap-2">
                   <span className="p-1.5 rounded-lg bg-primary/10">
                     <Globe className="size-3.5 text-primary" />
                   </span>
@@ -171,13 +188,13 @@ export default function Contact() {
                             size="sm"
                             className="h-9 gap-2 text-xs border-foreground/20 hover:border-primary/50 hover:bg-primary/10"
                           >
-                            <social.icon className={`size-3.5 ${social.color} transition-colors`} />
+                            <social.icon className="size-3.5" />
                             {social.name}
                           </Button>
                         </a>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Follow me on {social.name}</p>
+                        <p>Find me on {social.name}</p>
                       </TooltipContent>
                     </Tooltip>
                   ))}
@@ -185,9 +202,9 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            <Card className="glass-card gradient-border-card bg-white/40 border-foreground/10">
+            <Card className="glass-card border-foreground/10">
               <CardContent className="p-6 space-y-4">
-                <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
+                <h3 className="text-sm font-semibold flex items-center gap-2">
                   <span className="p-1.5 rounded-lg bg-primary/10">
                     <Download className="size-3.5 text-primary" />
                   </span>
@@ -196,16 +213,9 @@ export default function Contact() {
                 <p className="text-xs text-foreground/60">
                   Get my full resume with detailed experience, education, and skills.
                 </p>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    alert("CV download link — add your PDF file URL here")
-                  }}
-                >
+                <a href="/cv.pdf" download>
                   <Button
-                    variant="default"
-                    className="w-full gap-2 rounded-xl h-11 bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
+                    className="w-full gap-2 rounded-xl h-11 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
                   >
                     <Download className="size-4" />
                     Download CV (PDF)

@@ -12,6 +12,8 @@ interface Project {
   icon: string
   gradient: string
   color: string
+  codeUrl?: string
+  demoUrl?: string
 }
 
 const projects: Project[] = [
@@ -23,6 +25,8 @@ const projects: Project[] = [
     icon: "📊",
     gradient: "from-blue-500/5 to-cyan-500/5",
     color: "oklch(0.6 0.2 230)",
+    codeUrl: "#",
+    demoUrl: "#",
   },
   {
     title: "Fitness Tracker",
@@ -32,6 +36,8 @@ const projects: Project[] = [
     icon: "🏃",
     gradient: "from-green-500/5 to-emerald-500/5",
     color: "oklch(0.6 0.2 160)",
+    codeUrl: "#",
+    demoUrl: "#",
   },
   {
     title: "Student Management",
@@ -41,6 +47,8 @@ const projects: Project[] = [
     icon: "🎓",
     gradient: "from-amber-500/5 to-orange-500/5",
     color: "oklch(0.65 0.2 70)",
+    codeUrl: "#",
+    demoUrl: "#",
   },
   {
     title: "Tiplink Travel",
@@ -50,6 +58,8 @@ const projects: Project[] = [
     icon: "✈️",
     gradient: "from-purple-500/5 to-pink-500/5",
     color: "oklch(0.6 0.2 300)",
+    codeUrl: "#",
+    demoUrl: "#",
   },
 ]
 
@@ -122,7 +132,7 @@ export default function Projects() {
                 className="relative"
               >
                 <Card
-                  className={`relative overflow-hidden border bg-white/50 border-foreground/10 backdrop-blur-sm glow-card bg-gradient-to-br ${project.gradient} h-full`}
+                  className={`relative overflow-hidden border bg-card/30 border-foreground/10 backdrop-blur-sm glow-card bg-gradient-to-br ${project.gradient} h-full`}
                 >
                   {/* Top gradient accent line */}
                   <div
@@ -182,13 +192,13 @@ export default function Projects() {
                       transition={{ duration: 0.2 }}
                     >
                       <div className="flex gap-2 pt-1">
-                        <a href="#" onClick={(e) => e.preventDefault()}>
+                        <a href={project.codeUrl} target="_blank" rel="noopener noreferrer">
                           <Button variant="ghost" size="sm" className="h-8 text-xs gap-1.5">
                             <GithubIcon className="size-3.5" />
                             Code
                           </Button>
                         </a>
-                        <a href="#" onClick={(e) => e.preventDefault()}>
+                        <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                           <Button variant="ghost" size="sm" className="h-8 text-xs gap-1.5">
                             <ExternalLink className="size-3.5" />
                             Live Demo
