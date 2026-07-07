@@ -1,9 +1,8 @@
-import { useEffect, useState, Suspense } from "react"
+import { useEffect, useState } from "react"
 import { motion, type Variants } from "framer-motion"
 import { ArrowDown, Sparkles, Code2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { FloatingShape3D } from "./FloatingShape3D"
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -38,15 +37,6 @@ export default function Hero() {
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0">
       <div className="absolute inset-0 grid-overlay" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,oklch(0.55_0.22_280/0.08)_0%,transparent_60%),radial-gradient(ellipse_at_70%_50%,oklch(0.72_0.25_25/0.06)_0%,transparent_60%)]" />
-
-      {/* 3D Floating Shape */}
-      <div className="absolute inset-0 flex items-center justify-end pr-0 md:pr-20 pointer-events-none">
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 md:w-[500px] md:h-[500px] opacity-70">
-          <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-primary/5 to-accent/5 rounded-full" />}>
-            <FloatingShape3D />
-          </Suspense>
-        </div>
-      </div>
 
       {/* Animated gradient orbs - subtle */}
       <motion.div
