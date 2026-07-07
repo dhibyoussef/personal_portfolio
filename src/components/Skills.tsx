@@ -69,9 +69,9 @@ export default function Skills() {
           <Badge className="mb-4 border-primary/30 bg-primary/10 text-primary rounded-full">
             Skills & Expertise
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-            Technologies I Work{" "}
-            <span className="gradient-text">With</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-foreground">
+            My Tech{" "}
+            <span className="gradient-text">Arsenal</span>
           </h2>
           <p className="text-foreground/60 mt-4 max-w-xl mx-auto text-sm">
             A curated set of technologies I use daily to bring ideas to life
@@ -88,17 +88,18 @@ export default function Skills() {
           {skillCategories.map((cat) => (
             <motion.div key={cat.title} variants={cardVariants}>
               <Card
-                className={`group h-full overflow-hidden border bg-white/50 border-foreground/10 backdrop-blur-sm glow-card bg-gradient-to-br ${cat.gradient}`}
+                className={`group h-full overflow-hidden border-2 bg-white/60 backdrop-blur-md glow-card bg-gradient-to-br ${cat.gradient}`}
               >
-                <CardHeader className="pb-2">
+                <CardHeader className="pb-3">
                   <div className="flex items-center gap-3">
-                    <div
-                      className="p-2.5 rounded-xl"
+                    <motion.div
+                      className="p-3 rounded-xl transition-transform"
                       style={{ background: `${cat.accentColor}20` }}
+                      whileHover={{ scale: 1.1, rotate: 10 }}
                     >
-                      <cat.icon className="size-4" style={{ color: cat.accentColor }} />
-                    </div>
-                    <CardTitle className="text-sm font-semibold">{cat.title}</CardTitle>
+                      <cat.icon className="size-5 font-bold" style={{ color: cat.accentColor }} />
+                    </motion.div>
+                    <CardTitle className="text-base font-bold tracking-tight">{cat.title}</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
