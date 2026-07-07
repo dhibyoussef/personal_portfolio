@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Code2, Palette, Zap, Sparkles, Quote } from "lucide-react"
+import HeroVideo from "./HeroVideo"
 
 const highlights = [
   { icon: Code2, label: "Clean Code", desc: "Maintainable, scalable solutions" },
@@ -141,6 +142,25 @@ export default function About() {
             </div>
           </motion.div>
         </div>
+
+        {/* Video Showcase Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="mt-24"
+        >
+          <div className="mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+              See My Work in Action
+            </h3>
+            <p className="text-foreground/60">
+              Watch a showcase of recent projects and what I can deliver
+            </p>
+          </div>
+          <HeroVideo />
+        </motion.div>
       </div>
     </section>
   )

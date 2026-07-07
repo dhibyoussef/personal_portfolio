@@ -17,26 +17,41 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
   const { theme, toggle } = useTheme()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40)
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight
+      const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0
+      setScrollProgress(progress)
+    }
     window.addEventListener("scroll", onScroll)
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={cn(
-        "fixed top-0 inset-x-0 z-50 transition-all duration-500",
-        scrolled
-          ? "bg-background/70 backdrop-blur-xl border-b border-border/40 shadow-lg shadow-black/5"
-          : "bg-gradient-to-b from-background/20 to-transparent"
-      )}
-    >
+    <>
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-blue-500 z-50 origin-left"
+        style={{ scaleX: scrollProgress / 100 }}
+      />
+      
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className={cn(
+          "fixed top-0 inset-x-0 z-40 transition-all duration-500",
+          scrolled
+
+            ? "bg-background/70 backdrop-blur-xl border-b border-border/40 shadow-lg shadow-black/5"
+            : "bg-gradient-to-b from-background/20 to-transparent"
+
+        )}
+      >
       <div className="max-w-6xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
         <motion.a
           href="#hero"
@@ -82,7 +97,8 @@ export default function Navbar() {
           >
             <Button
               size="sm"
-              className="ml-2 rounded-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
+              className="ml-2 rounded-full bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
+
             >
               Hire Me
             </Button>
@@ -115,7 +131,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden border-t border-border/30 bg-background/95 backdrop-blur-xl overflow-hidden"
+            className="md:hidden border-t border-foreground/10 bg-white/95 backdrop-blur-xl overflow-hidden"
           >
             <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
               {navLinks.map((link, i) => (
@@ -126,20 +142,24 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => setMobileOpen(false)}
+
                   className="px-4 py-3 rounded-lg text-foreground/60 hover:text-foreground hover:bg-muted/50 transition-colors"
+
                 >
                   {link.label}
                 </motion.a>
               ))}
               <a href="#contact" onClick={() => setMobileOpen(false)}>
-                <Button className="w-full mt-2 rounded-full bg-gradient-to-r from-primary to-accent text-white">
-                  Hire Me
-                </Button>
+              <Button className="w-full mt-2 rounded-full bg-gradient-to-r from-primary via-primary to-accent text-white">
+                Hire Me
+              </Button>
+
               </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+      </motion.nav>
+    </>
   )
 }

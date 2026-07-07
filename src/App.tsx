@@ -1,10 +1,14 @@
+
 import { useState, useEffect, createContext, useContext } from "react"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import About from "./components/About"
+import Stats from "./components/Stats"
+import Services from "./components/Services"
 import Skills from "./components/Skills"
 import Timeline from "./components/Timeline"
 import Projects from "./components/Projects"
+import Testimonials from "./components/Testimonials"
 import Contact from "./components/Contact"
 import Footer from "./components/Footer"
 import BackToTop from "./components/BackToTop"
@@ -15,12 +19,13 @@ type Theme = "dark" | "light"
 
 const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
   theme: "dark",
-  toggle: () => {},
+  toggle: () => { },
 })
 
 export const useTheme = () => useContext(ThemeContext)
 
 export default function App() {
+
   const [theme, setTheme] = useState<Theme>("dark")
 
   useEffect(() => {
@@ -36,6 +41,7 @@ export default function App() {
 
   const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"))
 
+
   return (
     <ThemeContext.Provider value={{ theme, toggle }}>
       <TooltipProvider>
@@ -45,9 +51,12 @@ export default function App() {
           <main>
             <Hero />
             <About />
+            <Stats />
+            <Services />
             <Skills />
             <Timeline />
             <Projects />
+            <Testimonials />
             <Contact />
           </main>
           <Footer />

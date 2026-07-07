@@ -14,6 +14,8 @@ interface Project {
   color: string
   codeUrl?: string
   demoUrl?: string
+  image?: string
+  category: string
 }
 
 const projects: Project[] = [
@@ -21,6 +23,7 @@ const projects: Project[] = [
     title: "RadarWebTN",
     description:
       "Market Intelligence Platform — Real-time data aggregation and analytics dashboard for market insights and competitive analysis.",
+    category: "Enterprise Analytics",
     tags: ["React", "Python", "Data Viz", "Analytics"],
     icon: "📊",
     gradient: "from-blue-500/5 to-cyan-500/5",
@@ -32,6 +35,7 @@ const projects: Project[] = [
     title: "Fitness Tracker",
     description:
       "Sports Tracking Web App — Track workouts, set goals, monitor progress with interactive charts and personalized insights.",
+    category: "Health & Wellness",
     tags: ["React", "Tailwind", "Charts", "Health"],
     icon: "🏃",
     gradient: "from-green-500/5 to-emerald-500/5",
@@ -43,6 +47,7 @@ const projects: Project[] = [
     title: "Student Management",
     description:
       "Comprehensive system for managing student records, grades, attendance, and academic performance tracking with reporting.",
+    category: "Education",
     tags: ["PHP", "Symfony", "SQL", "Admin"],
     icon: "🎓",
     gradient: "from-amber-500/5 to-orange-500/5",
@@ -54,6 +59,7 @@ const projects: Project[] = [
     title: "Tiplink Travel",
     description:
       "Travel web app for planning trips, discovering destinations, and managing itineraries with a seamless UX.",
+    category: "Travel & Lifestyle",
     tags: ["Next.js", "API", "UI/UX", "Travel"],
     icon: "✈️",
     gradient: "from-purple-500/5 to-pink-500/5",
@@ -132,11 +138,23 @@ export default function Projects() {
                 className="relative"
               >
                 <Card
-                  className={`relative overflow-hidden border bg-card/30 border-foreground/10 backdrop-blur-sm glow-card bg-gradient-to-br ${project.gradient} h-full`}
+                  className={`relative overflow-hidden border-2 bg-white/60 border-primary/20 backdrop-blur-lg glow-card bg-gradient-to-br ${project.gradient} h-full group`}
                 >
+                  {/* Image Preview */}
+                  <div className="relative h-40 bg-gradient-to-br from-foreground/5 to-foreground/10 overflow-hidden group">
+                    <motion.div
+                      className="absolute inset-0 flex items-center justify-center text-5xl group-hover:scale-110 transition-transform duration-300"
+                    >
+                      {project.icon}
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </div>
+
                   {/* Top gradient accent line */}
                   <div
-                    className="absolute top-0 left-0 right-0 h-1.5 opacity-70"
+                    className="absolute top-40 left-0 right-0 h-1 opacity-70"
                     style={{
                       background: `linear-gradient(90deg, ${project.color}, transparent)`,
                     }}
@@ -146,17 +164,15 @@ export default function Projects() {
                   <div className="absolute -top-24 -right-24 w-56 h-56 rounded-full opacity-40 blur-3xl pointer-events-none" style={{ background: project.color }} />
                   <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-primary/8 to-transparent rounded-bl-full opacity-60" />
 
-                  <CardHeader className="pb-2 relative z-10">
+                  <CardHeader className="pb-3 relative z-10">
+                    <div className="flex items-start justify-between mb-2">
+                      <Badge className="text-xs font-semibold bg-primary/15 text-primary border-primary/30 rounded-full">
+                        {project.category}
+                      </Badge>
+                    </div>
                     <div className="flex items-start justify-between">
-                      <div className="flex items-center gap-3">
-                        <motion.span
-                          className="text-3xl"
-                          animate={hoveredIndex === i ? { rotate: [0, -10, 10, -10, 0], scale: 1.2 } : {}}
-                          transition={{ duration: 0.5 }}
-                        >
-                          {project.icon}
-                        </motion.span>
-                        <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors">
+                      <div>
+                        <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
                           {project.title}
                         </CardTitle>
                       </div>
@@ -174,15 +190,20 @@ export default function Projects() {
                       {project.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <Badge
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {project.tags.map((tag, idx) => (
+                        <motion.div
                           key={tag}
-                          variant="secondary"
-                          className="text-[11px] px-2.5 py-1 font-medium bg-primary/8 text-primary/80 border-primary/15"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: idx * 0.05, duration: 0.3 }}
                         >
-                          {tag}
-                        </Badge>
+                          <Badge
+                            className="text-[11px] px-3 py-1.5 font-bold bg-white/50 text-foreground border-primary/30 border-2 hover:bg-primary/10 transition-all cursor-default"
+                          >
+                            {tag}
+                          </Badge>
+                        </motion.div>
                       ))}
                     </div>
 

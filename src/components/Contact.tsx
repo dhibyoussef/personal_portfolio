@@ -70,7 +70,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 px-6 bg-muted/30">
+    <section id="contact" className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-white/50 to-primary/5">
       <div className="absolute inset-0 grid-overlay opacity-30" />
       <div className="max-w-6xl mx-auto relative">
         <motion.div
@@ -83,7 +83,7 @@ export default function Contact() {
           <Badge className="mb-4 border-primary/30 bg-primary/10 text-primary rounded-full">
             Contact
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
             Let's{" "}
             <span className="gradient-text">Work Together</span>
           </h2>
@@ -100,9 +100,9 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-3"
           >
-            <Card className="glass-card border-foreground/10">
+            <Card className="glass-card gradient-border-card bg-white/40 border-foreground/10">
               <CardContent className="p-6 md:p-8">
-                <h3 className="text-sm font-semibold mb-6 flex items-center gap-2">
+                <h3 className="text-sm font-semibold mb-6 flex items-center gap-2 text-foreground">
                   <span className="p-1.5 rounded-lg bg-primary/10">
                     <Send className="size-3.5 text-primary" />
                   </span>
@@ -117,7 +117,8 @@ export default function Contact() {
                         required
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="h-11 bg-background/50 border-foreground/20 focus:border-primary/40 transition-colors"
+                        className="h-11 bg-white/50 border-foreground/20 focus:border-primary/40 transition-colors"
+
                       />
                     </div>
                     <div className="space-y-2">
@@ -128,7 +129,8 @@ export default function Contact() {
                         required
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="h-11 bg-background/50 border-foreground/20 focus:border-primary/40 transition-colors"
+                        className="h-11 bg-white/50 border-foreground/20 focus:border-primary/40 transition-colors"
+
                       />
                     </div>
                   </div>
@@ -140,13 +142,16 @@ export default function Contact() {
                       rows={5}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="bg-background/50 border-foreground/20 focus:border-primary/40 transition-colors resize-none"
+                      className="bg-white/50 border-foreground/20 focus:border-primary/40 transition-colors resize-none"
+
                     />
                   </div>
                   <Button
                     type="submit"
+
                     disabled={status === "sending"}
                     className="w-full h-12 gap-2 rounded-xl bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white disabled:opacity-70"
+
                   >
                     {status === "sending" ? (
                       <><Loader2 className="size-4 animate-spin" /> Sending...</>
@@ -170,9 +175,12 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-2 space-y-5"
           >
-            <Card className="glass-card border-foreground/10">
+
+            <Card className="glass-card gradient-border-card bg-white/40 border-foreground/10">
+
+
               <CardContent className="p-6 space-y-4">
-                <h3 className="text-sm font-semibold flex items-center gap-2">
+                <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
                   <span className="p-1.5 rounded-lg bg-primary/10">
                     <Globe className="size-3.5 text-primary" />
                   </span>
@@ -202,9 +210,12 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            <Card className="glass-card border-foreground/10">
+
+            <Card className="glass-card gradient-border-card bg-white/40 border-foreground/10">
+
+
               <CardContent className="p-6 space-y-4">
-                <h3 className="text-sm font-semibold flex items-center gap-2">
+                <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
                   <span className="p-1.5 rounded-lg bg-primary/10">
                     <Download className="size-3.5 text-primary" />
                   </span>
@@ -215,7 +226,10 @@ export default function Contact() {
                 </p>
                 <a href="/cv.pdf" download>
                   <Button
-                    className="w-full gap-2 rounded-xl h-11 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
+
+                    variant="default"
+                    className="w-full gap-2 rounded-xl h-11 bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 text-white"
+
                   >
                     <Download className="size-4" />
                     Download CV (PDF)
@@ -254,8 +268,8 @@ export default function Contact() {
               </CardContent>
             </Card>
           </motion.div>
-        </div>
-      </div>
-    </section>
+        </div >
+      </div >
+    </section >
   )
 }
